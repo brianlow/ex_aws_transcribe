@@ -1,10 +1,12 @@
 defmodule ExAwsTranscribe.MixProject do
   use Mix.Project
 
+  @version "0.2.0"
+
   def project do
     [
       app: :ex_aws_transcribe,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
       description: "AWS Transcribe service module for ex_aws",
@@ -30,11 +32,10 @@ defmodule ExAwsTranscribe.MixProject do
   defp docs() do
     [
       main: "readme",
-      name: "Jason",
-      # source_ref: "v#{@version}",
+      source_ref: "v#{@version}",
       canonical: "http://hexdocs.pm/ex_aws_transcribe",
       extras: [
-        "README.md"
+        "README.md": [title: "Overview"]
       ]
     ]
   end
