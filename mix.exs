@@ -13,7 +13,7 @@ defmodule ExAwsTranscribe.MixProject do
       package: package(),
       deps: deps(),
       docs: [
-        main: "ExAws.Transcribe",
+        main: "readme",
         extras: ["README.md"]
       ]
     ]

@@ -9,13 +9,7 @@
 alias ExAws.Transcribe
 
 # Submit a transcription job
-Transcribe.start_transcription_job(
-  "MyJob",
-  "s3://mybucket/myfile.mp3",
-  "mp3",
-  "en-US",
-  settings: [show_speaker_labels: true]
-) |> ExAws.request!
+Transcribe.start_transcription_job("MyJob", "s3://bucket/file.mp3", "mp3", "en-US") |> ExAws.request!
 
 # List jobs
 Transcribe.list_transaction_jobs() |> ExAws.request!
