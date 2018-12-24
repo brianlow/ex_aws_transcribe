@@ -1,4 +1,8 @@
 defmodule ExAws.Transcribe do
+  @moduledoc """
+    Operations for AWS Transcribe
+  """
+
   import ExAws.Utils, only: [camelize_keys: 2]
 
   @version "2017-10-26"
@@ -6,7 +10,7 @@ defmodule ExAws.Transcribe do
   @doc """
     Starts an asynchronous job to transcribe speech to text.
 
-    Doc: https://docs.aws.amazon.com/transcribe/latest/dg/API_StartTranscriptionJob.html
+    Doc: <https://docs.aws.amazon.com/transcribe/latest/dg/API_StartTranscriptionJob.html>
 
     Example:
     ```
@@ -54,7 +58,7 @@ defmodule ExAws.Transcribe do
   @doc """
     Lists transcription jobs with the specified status.
 
-    Doc: https://docs.aws.amazon.com/transcribe/latest/dg/API_ListTranscriptionJobs.html
+    Doc: <https://docs.aws.amazon.com/transcribe/latest/dg/API_ListTranscriptionJobs.html>
 
     Examples:
     ```
@@ -79,7 +83,7 @@ defmodule ExAws.Transcribe do
   @doc """
     Returns information about a transcription job.
 
-    Doc: https://docs.aws.amazon.com/transcribe/latest/dg/API_GetTranscriptionJob.html
+    Doc: <https://docs.aws.amazon.com/transcribe/latest/dg/API_GetTranscriptionJob.html>
 
     Example:
     ```

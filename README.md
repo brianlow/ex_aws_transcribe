@@ -3,7 +3,24 @@
 [AWS Transcribe](https://docs.aws.amazon.com/transcribe/latest/dg/API_Operations.html) service module for [ex_aws](https://github.com/ex-aws/ex_aws).
 
 
-## Usage
+## Installation
+
+The package can be installed by adding `ex_aws_transcribe` to your list of dependencies
+in `mix.exs` along with `:ex_aws` and your preferred JSON codec / http client:
+
+```
+def deps do
+  [
+    {:ex_aws, "~> 2.0"},
+    {:ex_aws_transcribe, "~> 0.1.0"},
+    {:poison, "~> 3.0"},
+    {:hackney, "~> 1.9"},
+  ]
+end
+```
+
+
+## Basic Usage
 
 ```elixir
 alias ExAws.Transcribe
@@ -20,20 +37,14 @@ transcript_url = get_in(job, ["TranscriptionJob", "Transcript", "TranscriptFileU
 {:ok, {_, _, body}} = :httpc.request(:get, {transcript_url, []}, [], [])
 ```
 
+Full documentation can be found at <https://hexdocs.pm/ex_aws_transcribe>
 
-## Installation
 
-The package can be installed by adding ex_aws_transcribe to your list of dependencies
-in mix.exs along with :ex_aws and your preferred JSON codec / http client
+## AWS Transcribe API Reference
 
-```
-def deps do
-  [
-    {:ex_aws, "~> 2.0"},
-    {:ex_aws_transcribe, "~> 0.1.0"},
-    {:poison, "~> 3.0"},
-    {:hackney, "~> 1.9"},
-  ]
-end
-```
+<https://docs.aws.amazon.com/transcribe/latest/dg/API_Operations.html>
+
+All options are handled as snake_case_atoms instead of CamelCase binaries as specified
+in the Transcribe API. For example, `:media_format` would be `MediaFormat`.
+
 

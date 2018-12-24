@@ -12,10 +12,7 @@ defmodule ExAwsTranscribe.MixProject do
       homepage_url: "https://github.com/brianlow/ex_aws_transcribe",
       package: package(),
       deps: deps(),
-      docs: [
-        main: "readme",
-        extras: ["README.md"]
-      ]
+      docs: docs()
     ]
   end
 
@@ -27,6 +24,18 @@ defmodule ExAwsTranscribe.MixProject do
     [
       licenses: ["mit"],
       links: %{"GitHub" => "https://github.com/brianlow/ex_aws_transcribe"}
+    ]
+  end
+
+  defp docs() do
+    [
+      main: "readme",
+      name: "Jason",
+      # source_ref: "v#{@version}",
+      canonical: "http://hexdocs.pm/ex_aws_transcribe",
+      extras: [
+        "README.md"
+      ]
     ]
   end
 
