@@ -6,17 +6,40 @@
 ## Installation
 
 The package can be installed by adding `ex_aws_transcribe` to your list of dependencies
-in `mix.exs` along with `:ex_aws` and your preferred JSON codec / http client:
+in `mix.exs` along with a specific fork of `ex_aws` and your preferred JSON codec / http client:
 
-```
+```elixir
 def deps do
   [
-    {:ex_aws, "~> 2.0"},
-    {:ex_aws_transcribe, "~> 0.1.0"},
+    {:ex_aws, git: "https://github.com/brianlow/ex_aws.git", branch: "transcribe", override: true},
+    {:ex_aws_transcribe, "~> 0.2.1"},
     {:poison, "~> 3.0"},
     {:hackney, "~> 1.9"},
   ]
 end
+```
+
+Notice this uses a specific fork of `ex_aws` which adds the AWS Transcribe endpoints. If this works for
+you please vote / comment on [PR #611](https://github.com/ex-aws/ex_aws/pull/611) so this can use
+a published version of ex_aws.
+
+
+## Alternative Installation
+
+If you'd prefer to use a published version of ex_aws you'll need to use `ExAws.perform/2`
+with a config patched together from S3 (S3 and Transcribe have simlar ExAws.Configs).
+
+```elixir
+def deps do
+  [
+    {:ex_aws, "~> 2.1.0", override: true},
+    ...
+  ]
+end
+
+config = ExAws.Config.new(:s3, host: "transcribe.us-east-1.amazonaws.com", region: "us-east-1")
+
+Transcribe.list_transaction_jobs() |> ExAws.Operation.perform(config)
 ```
 
 
