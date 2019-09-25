@@ -6,59 +6,53 @@
 ## Installation
 
 The package can be installed by adding `ex_aws_transcribe` to your list of dependencies
-in `mix.exs` along with a specific fork of `ex_aws` and your preferred JSON codec / http client:
+in `mix.exs` along with your preferred JSON codec and http client:
 
 ```elixir
 def deps do
   [
-    {:ex_aws, git: "https://github.com/brianlow/ex_aws.git", branch: "transcribe", override: true},
-    {:ex_aws_transcribe, "~> 0.2.1"},
+    {:ex_aws, "~> 2.1.1"},
+    {:ex_aws_transcribe, "~> 0.2.2"},
     {:poison, "~> 3.0"},
     {:hackney, "~> 1.9"},
   ]
 end
 ```
 
-Notice this uses a specific fork of `ex_aws` which adds the AWS Transcribe endpoints. If this works for
-you please vote / comment on [PR #611](https://github.com/ex-aws/ex_aws/pull/611) so this can use
-a published version of ex_aws.
-
-
-## Alternative Installation
-
-If you'd prefer to use a published version of ex_aws you'll need to use `ExAws.perform/2`
-with a config patched together from S3 (S3 and Transcribe have simlar ExAws.Configs).
-
-```elixir
-def deps do
-  [
-    {:ex_aws, "~> 2.1.0", override: true},
-    ...
-  ]
-end
-
-config = ExAws.Config.new(:s3, host: "transcribe.us-east-1.amazonaws.com", region: "us-east-1")
-
-Transcribe.list_transaction_jobs() |> ExAws.Operation.perform(config)
-```
-
 
 ## Basic Usage
 
 ```elixir
-alias ExAws.Transcribe
 
-# Submit a transcription job
-Transcribe.start_transcription_job("MyJob", "s3://bucket/file.mp3", "mp3", "en-US") |> ExAws.request!
+# Start transcription
+ExAws.Transcribe.start_transcription_job("MyJob", "s3://bucket/file.mp3", "mp3", "en-US") |> ExAws.request!
 
-# List jobs
-Transcribe.list_transaction_jobs() |> ExAws.request!
+# Monitor progress
+job = ExAws.Transcribe.get_transcription_job("MyJob") |> ExAws.request!
 
-# Get a job and retrieve the transcript if complete
-job = Transcribe.get_transaction_job("MyJob") |> ExAws.request!
+# Fetch the transcript if complete
+:ssl.start()
+:inets.start()
 transcript_url = get_in(job, ["TranscriptionJob", "Transcript", "TranscriptFileUri"])
-{:ok, {_, _, body}} = :httpc.request(:get, {transcript_url, []}, [], [])
+{:ok, {_, _, body}} = :httpc.request(:get, {to_charlist(transcript_url), []}, [], [])
 ```
+
+## Listing jobs
+
+```elixir
+
+ExAws.Transcribe.list_transcription_jobs() |> ExAws.request!
+```
+
+## Specify settings
+
+```elixir
+
+settings = [settings: [show_speaker_labels: true, max_speaker_labels: 10]]
+
+ExAws.Transcribe.start_transcription_job(name, url, format, language, settings) |> ExAws.request()
+```
+
 
 Full documentation can be found at <https://hexdocs.pm/ex_aws_transcribe>
 
