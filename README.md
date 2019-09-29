@@ -48,9 +48,9 @@ ExAws.Transcribe.list_transcription_jobs() |> ExAws.request!
 
 ```elixir
 
-settings = [settings: [show_speaker_labels: true, max_speaker_labels: 10]]
+opts = [settings: [show_speaker_labels: true, max_speaker_labels: 10]]
 
-ExAws.Transcribe.start_transcription_job(name, url, format, language, settings) |> ExAws.request()
+ExAws.Transcribe.start_transcription_job(name, url, format, language, opts) |> ExAws.request()
 ```
 
 

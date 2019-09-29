@@ -40,7 +40,7 @@ defmodule ExAws.Transcribe do
           uri :: binary,
           format :: binary,
           language :: binary,
-          opts: start_transcription_job_opts
+          start_transcription_job_opts
         ) :: ExAws.Operation.JSON.t()
   def start_transcription_job(name, uri, format, language, opts \\ []) do
     params =

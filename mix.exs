@@ -1,7 +1,7 @@
 defmodule ExAwsTranscribe.MixProject do
   use Mix.Project
 
-  @version "0.2.2"
+  @version "0.2.3"
 
   def project do
     [
@@ -47,6 +47,7 @@ defmodule ExAwsTranscribe.MixProject do
       {:hackney, ">= 0.0.0", only: [:dev, :test]},
       {:poison, ">= 0.0.0", only: [:dev, :test]},
       {:sweet_xml, ">= 0.0.0", only: [:dev, :test]},
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
     ]
   end
 end
