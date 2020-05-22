@@ -25,6 +25,10 @@ defmodule ExAws.Transcribe do
           max_speaker_labels: integer,
           show_speaker_labels: boolean,
           vocabulary_name: binary
+        ]  
+  @type start_transcription_job_execution_settings :: [
+          allow_deferred_execution: boolean,
+          data_access_role_arn: binary
         ]
   @type start_transcription_job_opts :: [
           language_code: binary,
@@ -33,7 +37,8 @@ defmodule ExAws.Transcribe do
           transcription_job_name: binary,
           media_sample_rate_hertz: integer,
           output_bucket_name: binary,
-          settings: start_transcription_job_settings
+          settings: start_transcription_job_settings,
+          job_execution_settings: start_transcription_job_execution_settings
         ]
   @spec start_transcription_job(
           name :: binary,
